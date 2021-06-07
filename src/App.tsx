@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import Auth from "./components/Auth";
+import Layout from "./components/Layout";
 
 const App = () => {
   return (
     <div className="App">
-      <Auth />
+      <Layout />
     </div>
   );
 };
