@@ -1,10 +1,7 @@
 import React from "react";
-import { Button, Container, Grid, makeStyles } from "@material-ui/core";
+import { Container, Grid, makeStyles } from "@material-ui/core";
 import Navigation from "../Navigation";
-import Auth, { showAuthModal } from "../../modules/Auth";
-
-import { shallowEqual, useStore } from "react-redux";
-import { useSelector } from "../../redux/utils";
+import Auth from "../../modules/Auth";
 
 const useStyles = makeStyles({
   root: {
@@ -15,20 +12,14 @@ const useStyles = makeStyles({
   menuContainer: {
     textAlign: "right",
   },
+  authContainer: {
+    display: "flex",
+    justifyContent: "flex-end",
+  },
 });
 
 const Header = () => {
-  const store = useStore();
-
   const classes = useStyles();
-
-  const user = useSelector((state) => state.modules.auth.user, shallowEqual);
-
-  const handleLogout = () => {
-    // TODO
-  };
-
-  const handleShowAuthModal = () => showAuthModal(store);
 
   return (
     <Container className={classes.root}>
@@ -46,16 +37,11 @@ const Header = () => {
           <Grid item xs={9}>
             <Navigation />
           </Grid>
-          <Grid item xs={3}>
-            {user ? (
-              <Button onClick={handleLogout}>Logout</Button>
-            ) : (
-              <Button onClick={handleShowAuthModal}>Login</Button>
-            )}
+          <Grid item xs={3} className={classes.authContainer}>
+            <Auth />
           </Grid>
         </Grid>
       </Grid>
-      <Auth />
     </Container>
   );
 };

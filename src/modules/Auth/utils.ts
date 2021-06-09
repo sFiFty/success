@@ -1,6 +1,6 @@
 import AuthActions from "./store/authActions";
 import { AppStore } from "../../redux/configureStore";
-import { User } from "@firebase/auth";
+import { Auth, signOut, User } from "@firebase/auth";
 import { IUser } from "./store/authTypes";
 
 // Mao firebase user to local user
@@ -20,10 +20,6 @@ export const closeAuthModal = (store: AppStore) => {
   store.dispatch(AuthActions.setModalOpen(false));
 };
 
-export const setUser = (store: AppStore, user: User) => {
-  store.dispatch(AuthActions.setUser(user));
-};
-
-export const clearUser = (store: AppStore) => {
-  store.dispatch(AuthActions.clearUser());
+export const logout = async (auth: Auth) => {
+  await signOut(auth);
 };
